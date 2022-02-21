@@ -1,0 +1,21 @@
+div
+  the-navbar(
+    v-model="language"
+  )
+  .container_global.d-flex(
+    v-if="!loading"
+  )
+    the-menu(
+      :menu-items="menuItems"
+      :menu-item-active-id="menuItemActiveId"
+      @change-menu-item="changeMenuItem"
+    )
+    .p-1.w-100
+      template(
+        v-for="item in menuItems"
+        :key="item.id"
+      )
+        component(
+          :is="item.component"
+          v-show="item.id === menuItemActiveId"
+        )

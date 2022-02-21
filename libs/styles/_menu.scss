@@ -1,0 +1,7 @@
+.the_menu {
+  width: $menu-width;
+  min-height: calc(100vh - #{ $navbar-height });
+}
+.the_menu__link {
+  padding: .1rem .25rem;
+}

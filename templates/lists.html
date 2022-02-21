@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lists</title>
+  <style>
+    .dt,
+    .dd {
+      float: left;
+      margin: 0;
+      padding: 0;
+    }
+    .dt {
+      clear:both;
+      font-weight: bold;
+    }
+    .dt span {
+      display: inline-block;
+      width: 70px;
+    }
+    .dd span{
+      display: inline-block;
+      margin-right: 5px;
+    }
+    ul.navigation {
+      list-style: none;
+      padding: 0;
+    }
+    ul.navigation li {
+      display: inline;
+    }
+  </style>
+</head>
+<body>
+<h1>Using ol, ul and dl for lists or groups of links</h1>
+<p>
+  <a href="https://www.w3.org/WAI/WCAG21/Techniques/html/H48.html">https://www.w3.org/WAI/WCAG21/Techniques/html/H48.html</a>
+</p>
+<h2>Example 1: A list showing steps in a sequence</h2>
+<p>This example uses an ordered list to show the sequence of steps in a process.</p>
+<pre>
+&lt;ol&gt;
+  &lt;li&gt;Mix eggs and milk in a bowl.&lt;/li&gt;
+  &lt;li&gt;Add salt and pepper.&lt;/li&gt;
+&lt;/ol&gt;
+</pre>
+<ol>
+  <li>Mix eggs and milk in a bowl.</li>
+  <li>Add salt and pepper.</li>
+</ol>
+
+<h2>Example 2: A grocery list</h2>
+<p>This example shows an unordered list of items to buy at the store.</p>
+<pre>
+&lt;ul&gt;
+  &lt;li&gt;Milk&lt;/li&gt;
+  &lt;li&gt;Eggs&lt;/li&gt;
+  &lt;li&gt;Butter&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+<ul>
+  <li>Milk</li>
+  <li>Eggs</li>
+  <li>Butter</li>
+</ul>
+
+<h2>Example 3: A word and its definition</h2>
+<p>This example uses a definition list to group a definition with the term that is being defined.</p>
+<pre>
+&lt;dl&gt;
+  &lt;dt&gt;blink&lt;/dt&gt;
+  &lt;dd&gt;turn on and off between .5 and 3 times per second&lt;/dd&gt;
+&lt;/dl&gt;
+</pre>
+<dl>
+  <dt>blink</dt>
+  <dd>turn on and off between .5 and 3 times per second</dd>
+</dl>
+
+<h2>Example 4: Contact information using a definition list</h2>
+<p>This example uses a defintion list to mark up pairs of related items. The pairs themselves are a logically related list. Since browsers lack wide support for CSS styling on definition list elements, span elements have been included in the markup for styling purposes only, and are not required:</p>
+<pre>
+&lt;dl&gt;
+  &lt;dt class="dt"&gt;&lt;span&gt;name:&lt;/span&gt;&lt;/dt&gt;
+  &lt;dd class="dd"&gt;&lt;span&gt;John Doe&lt;/span&gt;&lt;/dd&gt;
+  &lt;dt class="dt"&gt;&lt;span&gt;tel:&lt;/span&gt;&lt;/dt&gt;
+  &lt;dd class="dd"&gt;&lt;span&gt;01-2345678&lt;/span&gt;&lt;/dd&gt;
+  &lt;dt class="dt"&gt;&lt;span&gt;fax:&lt;/span&gt;&lt;/dt&gt;
+  &lt;dd class="dd"&gt;&lt;span&gt;02-3456789&lt;/span&gt;&lt;/dd&gt;
+  &lt;dt class="dt"&gt;&lt;span&gt;email:&lt;/span&gt;&lt;/dt&gt;
+  &lt;dd class="dd"&gt;&lt;span&gt;johndoe@someemail.com&lt;/span&gt;&lt;/dd&gt;
+&lt;/dl&gt;
+</pre>
+<p>The following CSS styling can be used to format each paired item in the list on its own line, as well as giving a table-like layout:</p>
+<pre>
+.dt,
+.dd {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+.dt {
+  clear:both;
+  font-weight: bold;
+}
+.dt span {
+  display: inline-block;
+  width: 70px;
+}
+.dd span{
+  display: inline-block;
+  margin-right: 5px;
+}
+</pre>
+<dl>
+  <dt class="dt"><span>name:</span></dt>
+  <dd class="dd"><span>John Doe</span></dd>
+  <dt class="dt"><span>tel:</span></dt>
+  <dd class="dd"><span>01-2345678</span></dd>
+  <dt class="dt"><span>fax:</span></dt>
+  <dd class="dd"><span>02-3456789</span></dd>
+  <dt class="dt"><span>email:</span></dt>
+  <dd class="dd"><span>johndoe@someemail.com</span></dd>
+</dl>
+
+<h2 style="clear:both;">Example 5: Using lists to group links</h2>
+<p>In this example the links are grouped using the ul and li elements.</p>
+<pre>
+&lt;a id="categories"&gt;&lt;/a&gt;&lt;h2&gt;Product Categories&lt;/h2&gt;
+&lt;ul class="navigation"&gt;
+  &lt;li&gt;&lt;a href="kitchen.html"&gt;Kitchen&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="bedbath.html"&gt;Bed &amp; Bath&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="dining.html"&gt;Fine Dining&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="lighting.html"&gt;Lighting&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="storage.html"&gt;Storage&lt;/a&gt;&lt;li&gt;
+&lt;/ul&gt;
+</pre>
+<p>CSS:</p>
+<pre>
+ul.navigation {
+  list-style: none;
+  padding: 0;
+}
+ul.navigation li {
+  display: inline;
+}
+</pre>
+<a id="categories"></a><h2>Product Categories</h2>
+<ul class="navigation">
+  <li><a href="kitchen.html">Kitchen</a></li>
+  <li><a href="bedbath.html">Bed &amp; Bath</a></li>
+  <li><a href="dining.html">Fine Dining</a></li>
+  <li><a href="lighting.html">Lighting</a></li>
+  <li><a href="storage.html">Storage</a><li>
+</ul>
+</body>
+</html>

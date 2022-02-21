@@ -1,0 +1,18 @@
+html {
+  box-sizing: border-box;
+  font-size: 12px;
+}
+body {
+  margin: 0;
+}
+.container_global {
+  width: 100%;
+  background-color: #b3b5b7;
+}
+.absolute_all {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}

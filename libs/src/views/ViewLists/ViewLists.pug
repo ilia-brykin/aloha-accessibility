@@ -1,0 +1,51 @@
+div
+  a-translation(
+    tag="h1"
+    text="_LISTS_OL_UL_DL_"
+  )
+  .row.mx-0
+    .col-6
+      .card
+        .card-header
+          h2.h4.mb-0 Funktionalität
+        .card-body
+          .btn-group(
+            role="group"
+          )
+            button.btn.btn-outline-primary(
+              type="button"
+              @click="toggleLists"
+            )
+              a-translation(
+                tag="span"
+                :text="textForBtnToggle"
+              )
+    .col-6
+      .card
+        .card-header
+          a-translation.h4.mb-0(
+            tag="h2"
+            text="_LINKS_"
+          )
+        .card-body
+          ul.list-group
+            li.list-group-item(
+              v-for="link in links"
+              :key="link.label"
+            )
+              a.position-relative(
+                :href="link.href"
+                target="_blank"
+              )
+                a-translation(
+                  tag="span"
+                  :text="link.label"
+                )
+                a-translation.absolute_all(
+                  tag="span"
+                  :title="link.title"
+                  aria-hidden="true"
+                )
+
+
+

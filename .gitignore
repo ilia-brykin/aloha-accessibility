@@ -1,0 +1,5 @@
+libs/static/*
+/.idea/*
+libs/node_modules/*
+libs/dist/*
+libs/package-lock.json
