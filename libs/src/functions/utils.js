@@ -43,7 +43,7 @@ export function traverse(tags = [], className, stop = false) {
       STYLE.color = tag.color;
       STYLE.backgroundColor = "#fff";
       STYLE.backgroundImage = "none";
-      STYLE.fontSize = "14px";
+      STYLE.fontSize = tag.fontSize || "1.2rem";
       STYLE.fontWeight = "bold";
       const TEXT_NODE = w.document.createTextNode("<" + slash + tag.name + ">");
       SPAN.insertBefore(TEXT_NODE, SPAN.firstChild);
