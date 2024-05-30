@@ -18,7 +18,7 @@ export default function EventsAPI({
   const toggleHeadings = ({ statusStop } = {}) => {
     const statusShow = isUndefined(statusStop) ?
       true :
-      statusStop;
+      !statusStop;
     chrome.scripting.executeScript(
       {
         target: {

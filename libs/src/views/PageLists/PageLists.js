@@ -1,23 +1,44 @@
+import {
+  onBeforeUnmount,
+} from "vue";
+
+import ACheckbox from "aloha-vue/src/ui/ACheckbox/ACheckbox";
 import AElement from "aloha-vue/src/AElement/AElement";
 import ATranslation from "aloha-vue/src/ATranslation/ATranslation";
 
 import EventsAPI from "./compositionAPI/EventsAPI";
+import TagsAPI from "./compositionAPI/TagsAPI";
 
 export default {
   name: "PageLists",
   components: {
+    ACheckbox,
     AElement,
     ATranslation,
   },
   setup() {
     const {
-      textForBtnToggle,
+      modelTags,
+      tags,
+      tagsWithModel,
+    } = TagsAPI();
+
+    const {
+      resetLists,
       toggleLists,
-    } = EventsAPI();
+    } = EventsAPI({
+      tagsWithModel,
+    });
+
+    onBeforeUnmount(() => {
+      resetLists();
+    });
 
     return {
-      textForBtnToggle,
       toggleLists,
+      modelTags,
+      tags,
+      tagsWithModel,
     };
   },
 };

@@ -4,8 +4,16 @@ div
     text="_LISTS_OL_UL_DL_"
   )
   div
+    a-checkbox(
+      v-model="modelTags"
+      :data="tags"
+      :is-button-group="true"
+      key-id="name"
+      key-label="name"
+      label="_TAGS_"
+    )
     a-element.a_btn.a_btn_primary(
       type="button"
-      :text="textForBtnToggle"
+      text="_APPLY_"
       @click="toggleLists"
     )

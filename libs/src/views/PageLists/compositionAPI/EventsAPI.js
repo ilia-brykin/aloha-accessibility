@@ -1,7 +1,6 @@
 import {
   computed,
   inject,
-  ref,
 } from "vue";
 
 import {
@@ -11,53 +10,15 @@ import {
   isUndefined,
 } from "lodash-es";
 
-export default function EventsAPI() {
+export default function EventsAPI({
+  tagsWithModel = computed(() => []),
+}) {
   const chromeTabId = inject("chromeTabId");
 
-  const isListsVisible = ref(false);
-  const TAGS = [
-    {
-      name: "UL",
-      color: "#ff0000",
-      insertInParent: true,
-    },
-    {
-      name: "OL",
-      color: "#713939",
-      insertInParent: true,
-    },
-    {
-      name: "DL",
-      color: "#00aa00",
-      insertInParent: true,
-    },
-    {
-      name: "LI",
-      color: "#054164",
-      insertInParent: false,
-    },
-    {
-      name: "DT",
-      color: "#054164",
-      insertInParent: false,
-    },
-    {
-      name: "DD",
-      color: "#054164",
-      insertInParent: false,
-    },
-  ];
-
-  const textForBtnToggle = computed(() => {
-    return isListsVisible.value ?
-      "_LISTS_HIDE_" :
-      "_LISTS_SHOW_";
-  });
-
   const toggleLists = ({ statusStop } = {}) => {
-    const STATUS_STOP = isUndefined(statusStop) ?
-      !!isListsVisible.value :
-      statusStop;
+    const statusShow = isUndefined(statusStop) ?
+      true :
+      !statusStop;
     chrome.scripting.executeScript(
       {
         target: {
@@ -65,14 +26,17 @@ export default function EventsAPI() {
           allFrames: true,
         },
         function: traverse,
-        args: [TAGS, "a11y_lists", STATUS_STOP],
+        args: [{ tags: tagsWithModel.value, className: "a11y_lists", statusShow }],
       }
     );
-    isListsVisible.value = !STATUS_STOP;
+  };
+
+  const resetLists = () => {
+    toggleLists({ statusStop: true });
   };
 
   return {
-    textForBtnToggle,
+    resetLists,
     toggleLists,
   };
 }
