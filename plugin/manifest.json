@@ -25,9 +25,7 @@
     "activeTab",
     "scripting",
     "tabs",
-    "notifications",
-    "http://*",
-    "https://*"
+    "notifications"
   ],
   "host_permissions": [
     "http://*/*",
