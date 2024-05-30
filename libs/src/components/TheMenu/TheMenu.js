@@ -1,31 +1,19 @@
-import ATranslation from "../ATranslation/ATranslation.vue";
+import AMenu2 from "aloha-vue/src/AMenu2/AMenu2";
+
+import MenuItemsAPI from "./compositionAPI/MenuItemsAPI";
 
 export default {
   name: "TheMenu",
   components: {
-    ATranslation,
+    AMenu2,
   },
-  props: {
-    menuItems: {
-      type: Array,
-      required: true,
-    },
-    menuItemActiveId: {
-      type: String,
-      required: true,
-    },
-  },
-  emits: [
-    "change-menu-item",
-  ],
-  data() {
-    return {
+  setup() {
+    const {
+      menuItems,
+    } = MenuItemsAPI();
 
+    return {
+      menuItems,
     };
-  },
-  methods: {
-    changeMenuItem(menuItemActiveId) {
-      this.$emit("change-menu-item", { menuItemActiveId });
-    },
   },
 };

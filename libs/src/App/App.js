@@ -1,10 +1,6 @@
-import ATranslation from "../components/ATranslation/ATranslation.vue";
-import TheLanguageSelect from "../components/TheLanguageSelect/TheLanguageSelect.vue";
+import ATranslation from "aloha-vue/src/ATranslation/ATranslation";
 import TheMenu from "../components/TheMenu/TheMenu.vue";
 import TheNavbar from "../components/TheNavbar/TheNavbar.vue";
-import ViewBlockquotes from "../views/ViewBlockquotes/ViewBlockquotes.vue";
-import ViewHeadings from "../views/ViewHeadings/ViewHeadings.vue";
-import ViewLists from "../views/ViewLists/ViewLists.vue";
 
 import {
   computed,
@@ -18,12 +14,18 @@ import {
 export default defineComponent({
   components: {
     ATranslation,
-    TheLanguageSelect,
     TheMenu,
     TheNavbar,
-    ViewBlockquotes,
-    ViewHeadings,
-    ViewLists,
+  },
+  provide() {
+    return {
+      language: computed(() => this.language),
+      tab: computed(() => this.tab),
+      tabId: computed(() => this.tabId),
+      consoleLog: this.consoleLog,
+      getStorageValue: this.getStorageValue,
+      setStorageValue: this.setStorageValue,
+    };
   },
   data() {
     return {
@@ -69,16 +71,6 @@ export default defineComponent({
     menuItemsKeyById() {
       return keyBy(this.menuItems, "id");
     },
-  },
-  provide() {
-    return {
-      language: computed(() => this.language),
-      tab: computed(() => this.tab),
-      tabId: computed(() => this.tabId),
-      consoleLog: this.consoleLog,
-      getStorageValue: this.getStorageValue,
-      setStorageValue: this.setStorageValue,
-    };
   },
   created() {
     this.setChromeTab();

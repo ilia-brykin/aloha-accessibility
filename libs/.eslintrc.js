@@ -1,19 +1,30 @@
-var OFF = 0, WARN = 1, ERROR = 2;
+const OFF = 0;
+const WARN = 1;
+const ERROR = 2;
 
 module.exports = exports = {
-  // parser: "@babel/eslint-parser",
+  root: true,
+  parser: "vue-eslint-parser",
   parserOptions: {
-    requireConfigFile: false,
+    parser: {
+      js: "@babel/eslint-parser",
+    },
     allowImportExportEverywhere: true,
-    ecmaVersion: 8,
+    ecmaVersion: 2021,
     sourceType: "module",
     impliedStrict: true,
     ecmaFeatures: {
       spread: true,
+      globalReturn: false,
+      impliedStrict: false,
+      jsx: false,
     },
   },
 
-  extends: "eslint:recommended",
+  extends: [
+    "eslint:recommended",
+    "plugin:vue/vue3-recommended",
+  ],
 
   globals: {
     L: false,
@@ -43,7 +54,7 @@ module.exports = exports = {
     process: false,
   },
 
-  "rules": {
+  rules: {
     // Possible Errors
     "for-direction": WARN,
     "getter-return": [WARN, { allowImplicit: true }],
@@ -52,18 +63,18 @@ module.exports = exports = {
     "no-compare-neg-zero": WARN,
     "no-cond-assign": [ERROR, "always"],
     "no-console": OFF,
-    "no-constant-condition": [WARN, { "checkLoops": false }],
+    "no-constant-condition": [WARN, { checkLoops: false }],
     "no-debugger": WARN,
     "no-dupe-args": WARN,
     "no-dupe-keys": WARN,
     "no-duplicate-case": WARN,
-    "no-empty": [WARN, { "allowEmptyCatch": true }],
+    "no-empty": [WARN, { allowEmptyCatch: true }],
     "no-empty-character-class": WARN,
     "no-extra-boolean-cast": WARN,
     "no-extra-semi": WARN,
     "no-func-assign": WARN,
     "no-inner-declarations": WARN,
-    "no-invalid-regexp": [WARN, { "allowConstructorFlags": ["u", "y"] }],
+    "no-invalid-regexp": [WARN, { allowConstructorFlags: ["u", "y"] }],
     "no-irregular-whitespace": OFF,
     "no-obj-calls": WARN,
     "no-prototype-builtins": WARN,
@@ -78,8 +89,8 @@ module.exports = exports = {
     // Best Practices
     "accessor-pairs": WARN,
     "block-scoped-var": WARN,
-    "curly": WARN,
-    "dot-notation": [WARN, { "allowKeywords": true }],
+    curly: WARN,
+    "dot-notation": [WARN, { allowKeywords: true }],
     "no-alert": WARN,
     "no-else-return": WARN,
     "no-eq-null": WARN,
@@ -99,7 +110,7 @@ module.exports = exports = {
     "no-useless-concat": WARN,
     "no-useless-escape": WARN,
     "require-await": WARN,
-    yoda: [WARN, "never", { "exceptRange": true }],
+    yoda: [WARN, "never", { exceptRange: true }],
 
     // Strict Mode
     strict: OFF,
@@ -107,7 +118,7 @@ module.exports = exports = {
     // Variables
     "no-shadow-restricted-names": WARN,
     "no-undef": WARN,
-    "no-use-before-define": [WARN, { "functions": false }],
+    "no-use-before-define": [WARN, { functions: false }],
     "no-unused-vars": WARN,
 
     // Stylistic Issues
@@ -115,7 +126,7 @@ module.exports = exports = {
     "array-bracket-spacing": [WARN, "never"],
     "block-spacing": [WARN, "always"],
     "brace-style": WARN,
-    "comma-spacing": [WARN, { "before": false, "after": true }],
+    "comma-spacing": [WARN, { before: false, after: true }],
     "comma-style": [WARN, "last"],
     "computed-property-spacing": [WARN, "never"],
     "eol-last": [WARN, "always"],
@@ -123,16 +134,16 @@ module.exports = exports = {
     "function-paren-newline": [WARN, "multiline-arguments"],
     "implicit-arrow-linebreak": [WARN, "beside"],
     indent: [WARN, 2, {
-      "VariableDeclarator": "first",
-      "FunctionDeclaration": {"parameters": "first"},
-      "FunctionExpression": {"parameters": "first" },
-      "CallExpression": {"arguments": "first"},
-      "ImportDeclaration": 1,
-      "ObjectExpression": "first",
-      "ArrayExpression": "first",
-      "ignoreComments": true,
-      "ignoredNodes": ["ConditionalExpression"],
-      "outerIIFEBody": 0,
+      VariableDeclarator: "first",
+      FunctionDeclaration: { parameters: "first" },
+      FunctionExpression: { parameters: "first" },
+      CallExpression: { arguments: "first" },
+      ImportDeclaration: 1,
+      ObjectExpression: "first",
+      ArrayExpression: "first",
+      ignoreComments: true,
+      ignoredNodes: ["ConditionalExpression"],
+      outerIIFEBody: 0,
     }],
     "key-spacing": WARN,
     "keyword-spacing": WARN,
@@ -144,13 +155,13 @@ module.exports = exports = {
     "object-curly-spacing": [WARN, "always"],
     "padded-blocks": [WARN, "never"],
     "quote-props": [WARN, "as-needed"],
-    "quotes": [WARN, "double", { "allowTemplateLiterals": true }],
+    quotes: [WARN, "double", { allowTemplateLiterals: true }],
     semi: [WARN, "always"],
     "space-before-blocks": WARN,
     "space-before-function-paren": [WARN, "never"],
     "space-in-parens": [WARN, "never"],
     "space-infix-ops": WARN,
-    "spaced-comment": [WARN, "always", { "exceptions": ["-", "*", "+", "@ngInject", "/"] }],
+    "spaced-comment": [WARN, "always", { exceptions: ["-", "*", "+", "@ngInject", "/"] }],
 
     // ECMAScript 6
     "arrow-parens": [WARN, "as-needed"],
@@ -164,6 +175,10 @@ module.exports = exports = {
     "prefer-const": WARN,
     // "prefer-template": WARN,
     "template-curly-spacing": [WARN, "always"],
+
+    // Vue.js
+    "vue/multi-word-component-names": OFF,
+    "vue/component-definition-name-casing": OFF, // TODO: wenn angular.js weg ist, soll WARN sein
   },
   env: {
     jquery: true,

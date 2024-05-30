@@ -1,22 +1,10 @@
-.the_menu.d-flex.flex-column.flex-shrink-0.p-1.text-white.bg-dark
-  ul.nav.nav-pills.flex-column.mb-auto.mt-1
-    li(
-      v-for="item in menuItems"
-      :key="item.id"
-      :class="{ 'nav-item' : menuItemActiveId === item.id }"
-    )
-      a.the_menu__link.nav-link.position-relative(
-        :class="menuItemActiveId === item.id ? 'active' : 'text-white'"
-        tabindex="0"
-        role="button"
-        @click="changeMenuItem(item.id)"
-      )
-        a-translation(
-          tag="span"
-          :text="item.label"
-        )
-        a-translation.absolute_all(
-          tag="span"
-          aria-hidden="true"
-          :title="item.title"
-        )
+a-menu-2(
+  :can-change-body-class="true"
+  :data="menuItems"
+  :is-link-truncated="false"
+  :is-search-breadcrumbs-truncated="false"
+  :is-translated="true"
+  key-children="children"
+  key-slot="slot"
+  menu-id="a_menu"
+)

@@ -1,53 +1,25 @@
-import AIcon from "../AIcon/AIcon.vue";
-import ATranslation from "../ATranslation/ATranslation.vue";
-import TheLanguageSelect from "../TheLanguageSelect/TheLanguageSelect.vue";
+import AElement from "aloha-vue/src/AElement/AElement";
+import ASelect from "aloha-vue/src/ui/ASelect/ASelect";
 
-import {
-  EventBus,
-} from "../../functions/event-bus";
+import LanguagesAPI from "./compositionAPI/LanguagesAPI";
 
 export default {
   name: "TheNavbar",
   components: {
-    AIcon,
-    ATranslation,
-    TheLanguageSelect,
+    ASelect,
+    AElement,
   },
-  props: {
-    modelValue: {
-      type: String,
-      required: true,
-    },
-  },
-  emits: [
-    "update:modelValue",
-  ],
-  data() {
+  setup() {
+    const {
+      changeLanguage,
+      languages,
+      modelLanguage,
+    } = LanguagesAPI();
+
     return {
-      isPlaying: false,
+      changeLanguage,
+      languages,
+      modelLanguage,
     };
-  },
-  computed: {
-    togglePlayIcon() {
-      return this.isPlaying ? "Pause" : "Play";
-    },
-
-    togglePlayText() {
-      return this.isPlaying ? "Pause" : "Play";
-    },
-  },
-  methods: {
-    updateLanguage(language) {
-      this.$emit("update:modelValue", language);
-    },
-
-    resetAll() {
-      EventBus.$emit("resetAll");
-    },
-
-    togglePlay() {
-      // TODO: OBSERVER
-      this.isPlaying = !this.isPlaying;
-    },
   },
 };

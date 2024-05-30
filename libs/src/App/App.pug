@@ -1,21 +1,14 @@
-div
-  the-navbar(
-    v-model="language"
-  )
-  .container_global.d-flex(
-    v-if="!loading"
-  )
-    the-menu(
-      :menu-items="menuItems"
-      :menu-item-active-id="menuItemActiveId"
-      @change-menu-item="changeMenuItem"
+.main_container
+  the-menu
+  .a_menu_2__page
+    the-navbar
+    router-view(
+      v-slot="{ Component, route }"
     )
-    .p-1.w-100
-      template(
-        v-for="item in menuItems"
-        :key="item.id"
+      transition(
+        name="fade"
       )
         component(
-          :is="item.component"
-          v-show="item.id === menuItemActiveId"
+          :is="Component"
+          :key="route.path"
         )
