@@ -29,12 +29,17 @@
     "http://*",
     "https://*"
   ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
   "content_scripts": [
     {
       "matches": [
         "<all_urls>"
       ],
-      "js": ["content/content.js"]
+      "js": ["content/content.js"],
+      "all_frames": true
     }
   ],
   "background": {
