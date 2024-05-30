@@ -45,6 +45,8 @@ export function traverse(tags = [], className, stop = false) {
       STYLE.backgroundImage = "none";
       STYLE.fontSize = tag.fontSize || "1.2rem";
       STYLE.fontWeight = "bold";
+      STYLE.padding = "0.3rem";
+      STYLE.border = `1px solid ${ tag.color }`;
       const TEXT_NODE = w.document.createTextNode("<" + slash + tag.name + ">");
       SPAN.insertBefore(TEXT_NODE, SPAN.firstChild);
       return SPAN;
