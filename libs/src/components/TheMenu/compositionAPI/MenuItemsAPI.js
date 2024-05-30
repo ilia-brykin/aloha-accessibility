@@ -20,6 +20,13 @@ export default function MenuItemsAPI() {
             name: "PageHeadings",
           },
         },
+        {
+          id: "PageLists",
+          label: "_LISTS_OL_UL_DL_",
+          to: {
+            name: "PageLists",
+          },
+        },
       ],
     },
 

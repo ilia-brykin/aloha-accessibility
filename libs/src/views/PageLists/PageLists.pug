@@ -1,0 +1,11 @@
+div
+  a-translation(
+    tag="h1"
+    text="_LISTS_OL_UL_DL_"
+  )
+  div
+    a-element.a_btn.a_btn_primary(
+      type="button"
+      :text="textForBtnToggle"
+      @click="toggleLists"
+    )

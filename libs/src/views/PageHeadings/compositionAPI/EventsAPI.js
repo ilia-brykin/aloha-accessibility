@@ -15,7 +15,6 @@ export default function EventsAPI() {
   const chromeTabId = inject("chromeTabId");
 
   const isHeadingsVisible = ref(false);
-
   const TAGS = [
     {
       name: "H1",
