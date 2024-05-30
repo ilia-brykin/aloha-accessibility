@@ -17,11 +17,6 @@ export default defineComponent({
     TheMenu,
     TheNavbar,
   },
-  provide() {
-    return {
-      tab: computed(() => this.tab),
-    };
-  },
   setup() {
     const {
       consoleLog,
@@ -35,6 +30,7 @@ export default defineComponent({
 
     provide("consoleLog", consoleLog);
     provide("chromeTab", computed(() => chromeTab.value));
+    provide("chromeTabId", computed(() => chromeTab.value?.id));
 
     setChromeTab();
 

@@ -3,57 +3,15 @@ div
     tag="h1"
     text="_HEADINGS_H1_H6_"
   )
-  .row.mx-0
-    .col-6
-      .card
-        .card-header
-          h2.h4.mb-0 Funktionalität
-        .card-body
-          .btn-group(
-            role="group"
-          )
-            button.btn.btn-outline-primary(
-              type="button"
-              @click="toggleHeadings"
-            )
-              a-translation(
-                tag="span"
-                :text="textForBtnToggleHeadings"
-              )
-            button.btn.btn-outline-primary(
-              type="button"
-              @click="checkHeadings"
-            )
-              a-translation(
-                tag="span"
-                text="_HEADINGS_CHECK_"
-              )
-    .col-6
-      .card
-        .card-header
-          a-translation.h4.mb-0(
-            tag="h2"
-            text="_LINKS_"
-          )
-        .card-body
-          ul.list-group
-            li.list-group-item(
-              v-for="link in links"
-              :key="link.label"
-            )
-              a.position-relative(
-                :href="link.href"
-                target="_blank"
-              )
-                a-translation(
-                  tag="span"
-                  :text="link.label"
-                )
-                a-translation.absolute_all(
-                  tag="span"
-                  :title="link.title"
-                  aria-hidden="true"
-                )
 
-
-
+  div
+    a-element.a_btn.a_btn_secondary(
+      type="button"
+      :text="textForBtnToggleHeadings"
+      @click="toggleHeadings"
+    )
+    a-element.a_btn.a_btn_secondary(
+      type="button"
+      text="_HEADINGS_CHECK_"
+      @click="checkHeadings"
+    )
