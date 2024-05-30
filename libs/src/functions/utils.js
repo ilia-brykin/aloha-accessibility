@@ -1,16 +1,16 @@
-export function traverse(tags = [], className, stop = false) {
-  traverseNew(window, tags, stop);
+export function traverse({ tags = [], className, statusShow = true } = {}) {
+  traverseNew(window, tags, statusShow);
 
-  function traverseNew(currentWindow = window, tags = [], stop) {
+  function traverseNew(currentWindow = window, tags = [], statusShow) {
     deleteTags(currentWindow);
     try {
-      if (!stop) {
+      if (statusShow) {
         for (let i = 0; i < tags.length; i++) {
           insertTag(currentWindow, tags[i]);
         }
       }
       for (let i = 0; i < currentWindow.frames.length; i++) {
-        traverseNew(currentWindow.frames[i], tags, stop);
+        traverseNew(currentWindow.frames[i], tags, statusShow);
       }
     } catch (e) {
       console.warn(e);

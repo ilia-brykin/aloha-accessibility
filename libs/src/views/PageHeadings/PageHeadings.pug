@@ -5,9 +5,17 @@ div
   )
 
   div
+    a-checkbox(
+      v-model="modelTags"
+      :data="tags"
+      :is-button-group="true"
+      key-id="name"
+      key-label="name"
+      label="_TAGS_"
+    )
     a-element.a_btn.a_btn_secondary(
       type="button"
-      :text="textForBtnToggleHeadings"
+      text="_APPLY_"
       @click="toggleHeadings"
     )
     // a-element.a_btn.a_btn_secondary(

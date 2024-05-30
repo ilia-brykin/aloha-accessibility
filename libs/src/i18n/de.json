@@ -7,8 +7,6 @@
   "_HEADINGS_CHECK_": "Überschriften prüfen",
   "_HEADINGS_H1_H6_": "Überschriften h1-h6",
   "_HEADINGS_H1_H6_TITLE_": "Verwendung von h1-h6 zur Identifizierung von Überschriften",
-  "_HEADINGS_HIDE_": "Überschriften ausblenden",
-  "_HEADINGS_SHOW_": "Überschriften einblenden",
   "_LANGUAGE_": "Sprache",
   "_LINKS_": "Links",
   "_LISTS_HIDE_": "Listen ausblenden",
@@ -19,5 +17,7 @@
   "_REMOVE_FIELD_CONTENT_": "Feldinhalt entfernen",
   "_START_PAGE_": "Startseite",
   "_SCRIPTS_PAGE_": "Skripte",
-  "_WELCOME_": "Willkommen"
+  "_WELCOME_": "Willkommen",
+  "_TAGS_": "Tags",
+  "_APPLY_": "Anwenden"
 }

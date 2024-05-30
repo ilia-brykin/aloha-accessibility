@@ -1,7 +1,6 @@
 import {
   computed,
   inject,
-  ref,
 } from "vue";
 
 import {
@@ -11,46 +10,14 @@ import {
   isUndefined,
 } from "lodash-es";
 
-export default function EventsAPI() {
+export default function EventsAPI({
+  tagsWithModel = computed(() => []),
+}) {
   const chromeTabId = inject("chromeTabId");
 
-  const isHeadingsVisible = ref(false);
-  const TAGS = [
-    {
-      name: "H1",
-      color: "#ff0000",
-      insertInParent: false,
-    },
-    {
-      name: "H2",
-      color: "#713939",
-      insertInParent: false,
-    },
-    {
-      name: "H3",
-      color: "#00aa00",
-      insertInParent: false,
-    },
-    {
-      name: "H4",
-      color: "#054164",
-      insertInParent: false,
-    },
-    {
-      name: "H5",
-      color: "#7F0A7F",
-      insertInParent: false,
-    },
-    {
-      name: "H6",
-      color: "#01D901",
-      insertInParent: false,
-    },
-  ];
-
   const toggleHeadings = ({ statusStop } = {}) => {
-    const STATUS_STOP = isUndefined(statusStop) ?
-      !!isHeadingsVisible.value :
+    const statusShow = isUndefined(statusStop) ?
+      true :
       statusStop;
     chrome.scripting.executeScript(
       {
@@ -59,17 +26,14 @@ export default function EventsAPI() {
           allFrames: true,
         },
         function: traverse,
-        args: [TAGS, "a11y_heading", STATUS_STOP],
+        args: [{ tags: tagsWithModel.value, className: "a11y_heading", statusShow }],
       }
     );
-    isHeadingsVisible.value = !STATUS_STOP;
   };
 
-  const textForBtnToggleHeadings = computed(() => {
-    return isHeadingsVisible.value ?
-      "_HEADINGS_HIDE_" :
-      "_HEADINGS_SHOW_";
-  });
+  const resetHeadings = () => {
+    toggleHeadings({ statusStop: true });
+  };
 
   const checkHeadings = async() => {
     const [TAB] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -81,7 +45,7 @@ export default function EventsAPI() {
           allFrames: true,
         },
         function: _checkHeadings,
-        args: [TAGS, "a11y_heading", !!isHeadingsVisible.value],
+        args: [tagsWithModel.value, "a11y_heading",],
       }
     );
   };
@@ -121,7 +85,7 @@ export default function EventsAPI() {
 
   return {
     checkHeadings,
-    textForBtnToggleHeadings,
+    resetHeadings,
     toggleHeadings,
   };
 }
