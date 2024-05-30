@@ -15,7 +15,7 @@ export default function MenuItemsAPI() {
       children: [
         {
           id: "PageHeadings",
-          label: "_HEADINGS_PAGE_",
+          label: "_HEADINGS_H1_H6_",
           to: {
             name: "PageHeadings",
           },
