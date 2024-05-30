@@ -3,36 +3,31 @@ import {
   createWebHashHistory,
 } from "vue-router";
 
+import NotFound from "../views/NotFound.vue";
+import PageStart from "../views/PageStart/PageStart.vue";
+import PageHeadings from "../views/PageHeadings/PageHeadings.vue";
+import PageLists from "../views/PageLists/PageLists.vue";
+
 const ROUTES = [
   {
     path: "/404",
     name: "NotFound",
-    component: () => import(/* webpackChunkName: "NotFound" */ "../views/NotFound.vue"),
+    component: NotFound,
   },
   {
     path: "/",
     name: "PageStart",
-    component: () => import(/* webpackChunkName: "PageFindSteps" */ "../views/PageStart/PageStart.vue"),
+    component: PageStart,
   },
-  // {
-  //   path: "/search/",
-  //   name: "PageAdditionalSearch",
-  //   component: () => import(/* webpackChunkName: "PageAdditionalSearch" */ "../views/PageAdditionalSearch/PageAdditionalSearch.vue"),
-  // },
-  // {
-  //   path: "/test/",
-  //   name: "PageTest",
-  //   component: () => import(/* webpackChunkName: "PageTest" */ "../views/PageTest/PageTest.vue"),
-  // },
   {
     path: "/headings/",
     name: "PageHeadings",
-    component: () => import(/* webpackChunkName: "PageHeadings" */ "../views/PageHeadings/PageHeadings.vue"),
+    component: PageHeadings,
   },
   {
     path: "/lists/",
     name: "PageLists",
-    component: () => import(/* webpackChunkName: "PageLists" */ "../views/PageLists/PageLists.vue"),
+    component: PageLists,
   },
   {
     // If the routing configuration '*' reports an error, replace it with '/: catchAll(. *)'
