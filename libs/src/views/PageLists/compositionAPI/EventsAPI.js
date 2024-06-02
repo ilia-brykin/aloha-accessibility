@@ -4,7 +4,7 @@ import {
 } from "vue";
 
 import {
-  traverse,
+  traverseDocument,
 } from "../../../functions/utils";
 import {
   isUndefined,
@@ -16,7 +16,7 @@ export default function EventsAPI({
   const chromeTabId = inject("chromeTabId");
 
   const toggleLists = ({ statusStop } = {}) => {
-    const statusShow = isUndefined(statusStop) ?
+    const shouldShowTags = isUndefined(statusStop) ?
       true :
       !statusStop;
     chrome.scripting.executeScript(
@@ -25,8 +25,8 @@ export default function EventsAPI({
           tabId: chromeTabId.value,
           allFrames: true,
         },
-        function: traverse,
-        args: [{ tags: tagsWithModel.value, className: "a11y_lists", statusShow }],
+        function: traverseDocument,
+        args: [{ elements: tagsWithModel.value, className: "a11y_lists", shouldShowTags }],
       }
     );
   };

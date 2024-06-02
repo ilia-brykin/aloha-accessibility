@@ -6,8 +6,8 @@ import ACheckbox from "aloha-vue/src/ui/ACheckbox/ACheckbox";
 import AElement from "aloha-vue/src/AElement/AElement";
 import ATranslation from "aloha-vue/src/ATranslation/ATranslation";
 
+import ElementsAPI from "./compositionAPI/ElementsAPI";
 import EventsAPI from "./compositionAPI/EventsAPI";
-import TagsAPI from "./compositionAPI/TagsAPI";
 
 export default {
   name: "PageHeadings",
@@ -18,17 +18,18 @@ export default {
   },
   setup() {
     const {
-      modelTags,
+      elementsRoleHeading,
+      elementsWithModel,
+      model,
       tags,
-      tagsWithModel,
-    } = TagsAPI();
+    } = ElementsAPI();
     
     const {
       checkHeadings,
       resetHeadings,
       toggleHeadings,
     } = EventsAPI({
-      tagsWithModel,
+      elementsWithModel,
     });
 
     onBeforeUnmount(() => {
@@ -37,9 +38,10 @@ export default {
 
     return {
       checkHeadings,
-      modelTags,
+      elementsRoleHeading,
+      elementsWithModel,
+      model,
       tags,
-      tagsWithModel,
       toggleHeadings,
     };
   },

@@ -13942,6 +13942,26 @@ h6, .h6 {
 .a_form_control_invalid .tox-tinymce {
   border-color: var(--a_form_element_error_color); }
 
+.a_checkbox_inline .a_checkbox__data_extra,
+.a_checkbox_inline .a_checkbox_data,
+.a_checkbox_inline .a_checkbox_radio_group__data {
+  display: flex;
+  flex-wrap: wrap; }
+
+.a_checkbox_control {
+  margin-top: 1rem; }
+  .a_checkbox_control .a_checkbox_data {
+    margin-top: 0.5rem; }
+  .a_checkbox_control .a_fieldset .a_fieldset {
+    margin-top: 1.5rem;
+    --a_fieldset_padding_top: 1.5rem; }
+
+.a_radio_inline .a_radio__data_extra,
+.a_radio_inline .a_radio_data,
+.a_radio_inline .a_checkbox_radio_group__data {
+  display: flex;
+  flex-wrap: wrap; }
+
 input:-webkit-autofill {
   animation-name: onAutoFillStart;
   transition: background-color 50000s ease-in-out 0s; }
@@ -16275,7 +16295,7 @@ input:not(:-webkit-autofill) {
   margin-left: auto; }
   .a_table__cell_action__group > * + * {
     margin-left: 0.5rem; }
-  .a_table__cell_action__group .aloha_group_btn_dropdown .a_btn_group {
+  .a_table__cell_action__group .aloha_group_btn_dropdown .a_btn_group_table {
     width: 100%; }
 
 .a_table__cell_action_sticky {

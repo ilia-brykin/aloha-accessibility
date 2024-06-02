@@ -6,12 +6,22 @@ div
 
   div
     a-checkbox(
-      v-model="modelTags"
+      v-model="model.tags"
       :data="tags"
-      :is-button-group="true"
+      :inline="true"
+      :has-control-checkbox="true"
       key-id="name"
       key-label="name"
       label="_TAGS_"
+    )
+    a-checkbox.a_mt_2.a_pt_1(
+      v-model="model.tags"
+      :data="elementsRoleHeading"
+      :inline="true"
+      :has-control-checkbox="true"
+      key-id="name"
+      key-label="name"
+      label="_ROLE_HEADING_"
     )
     a-element.a_btn.a_btn_secondary(
       type="button"

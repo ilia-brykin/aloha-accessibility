@@ -14,31 +14,37 @@ export default function TagsAPI() {
       name: "UL",
       color: "#ff0000",
       insertInParent: true,
+      type: "tag",
     },
     {
       name: "OL",
       color: "#713939",
       insertInParent: true,
+      type: "tag",
     },
     {
       name: "DL",
       color: "#00aa00",
       insertInParent: true,
+      type: "tag",
     },
     {
       name: "LI",
       color: "#054164",
       insertInParent: false,
+      type: "tag",
     },
     {
       name: "DT",
       color: "#054164",
       insertInParent: false,
+      type: "tag",
     },
     {
       name: "DD",
       color: "#054164",
       insertInParent: false,
+      type: "tag",
     },
   ];
 

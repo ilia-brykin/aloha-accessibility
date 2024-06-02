@@ -4,35 +4,35 @@ import {
 } from "vue";
 
 import {
-  traverse,
+  traverseDocument,
 } from "../../../functions/utils";
 import {
   isUndefined,
 } from "lodash-es";
 
 export default function EventsAPI({
-  tagsWithModel = computed(() => []),
+  elementsWithModel = computed(() => []),
 }) {
   const chromeTabId = inject("chromeTabId");
 
-  const toggleHeadings = ({ statusStop } = {}) => {
-    const statusShow = isUndefined(statusStop) ?
+  const toggleHeadings = ({ shouldShowTags } = {}) => {
+    const _shouldShowTags = isUndefined(shouldShowTags) ?
       true :
-      !statusStop;
+      !shouldShowTags;
     chrome.scripting.executeScript(
       {
         target: {
           tabId: chromeTabId.value,
           allFrames: true,
         },
-        function: traverse,
-        args: [{ tags: tagsWithModel.value, className: "a11y_heading", statusShow }],
+        function: traverseDocument,
+        args: [{ elements: elementsWithModel.value, className: "a11y_heading", shouldShowTags: _shouldShowTags }],
       }
     );
   };
 
   const resetHeadings = () => {
-    toggleHeadings({ statusStop: true });
+    toggleHeadings({ shouldShowTags: false });
   };
 
   const checkHeadings = async() => {
@@ -45,7 +45,7 @@ export default function EventsAPI({
           allFrames: true,
         },
         function: _checkHeadings,
-        args: [tagsWithModel.value, "a11y_heading",],
+        args: [elementsWithModel.value, "a11y_heading",],
       }
     );
   };
