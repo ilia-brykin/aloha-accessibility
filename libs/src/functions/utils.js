@@ -139,3 +139,37 @@ export function traverseDocument({ elements = [], className, shouldShowTags = tr
     }
   }
 }
+
+/**
+ * Scrolls to the given element specified by the selector and highlights it.
+ * The element will be highlighted with a red outline and a yellow background.
+ * The original styles will be restored after 2 seconds.
+ *
+ * @param {string} selector - The CSS selector of the element to highlight.
+ */
+export function highlightElement(selector) {
+  const element = document.querySelector(selector);
+  if (!element) {
+    console.error("Element not found:", selector);
+    return;
+  }
+
+  // Scroll to the element
+  element.scrollIntoView({ behavior: "smooth", block: "center" });
+
+  // Save original styles to restore later
+  const originalStyles = {
+    outline: element.style.outline,
+    backgroundColor: element.style.backgroundColor
+  };
+
+  // Apply highlight styles
+  element.style.outline = "3px solid red";
+  element.style.backgroundColor = "yellow";
+
+  // Remove highlight after 2 seconds and restore original styles
+  setTimeout(() => {
+    element.style.outline = originalStyles.outline;
+    element.style.backgroundColor = originalStyles.backgroundColor;
+  }, 2000);
+}

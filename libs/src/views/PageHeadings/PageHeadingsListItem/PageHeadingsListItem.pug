@@ -2,6 +2,11 @@ li.a_list_group__item
   div(
     :style="stylesLocal"
   ) {{ header.textWithTags }}
+    a-element.a_btn.a_btn_primary.a_ml_3(
+      type="button"
+      text="_BTN_HIGHLIGHT_ELEMENT_"
+      @click="onHighlightElement"
+    )
   dl.dl_hor.a_mb_0(
     v-if="isAdditionalVisible"
   )

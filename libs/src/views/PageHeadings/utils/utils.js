@@ -11,26 +11,42 @@ export function utilsHeading({ collect = false, analyze = false }) {
   }
 
   /**
-   * Collects all headings (h1-h6 and role="heading") in the document.
-   * @returns {Array<Object>} An array of objects representing the headings in the document.
-   * Each object contains the following properties:
-   * - {HTMLElement} element: The heading element.
-   * - {string} text: The text content of the heading.
-   * - {string} tag: The tag name or role description of the heading.
-   * - {number|undefined} level: The level of the heading or undefined if not specified.
-   * - {boolean} isVisible: Whether the heading is visible (width and height > 0).
-   * - {boolean} ariaHidden: Whether the heading or any of its ancestors have aria-hidden="true".
-   * - {string|undefined} id: The id attribute of the heading or undefined if not specified.
-   * - {string|undefined} class: The class attribute of the heading or undefined if not specified.
-   * - {string|undefined} ariaLevel: The aria-level attribute of the heading or undefined if not specified.
-   * - {string|undefined} role: The role attribute of the heading or undefined if not specified.
-   * - {string|undefined} ariaLabel: The aria-label attribute of the heading or undefined if not specified.
-   * - {string|undefined} ariaDescribedBy: The aria-describedby attribute of the heading or undefined if not specified.
-   * - {string|undefined} title: The title attribute of the heading or undefined if not specified.
-   * - {Object} otherAttributes: Any other attributes of the heading.
-   * - {string} html: The inner HTML content of the heading.
-   * - {string} textWithTags: The text content of the heading with appropriate HTML tags.
+   * Generates a unique CSS selector for a given element.
+   * @param {HTMLElement} element - The element to generate the selector for.
+   * @returns {string} - The unique CSS selector.
    */
+  function generateUniqueSelector(element) {
+    if (!(element instanceof HTMLElement)) {
+      throw new Error("Invalid element provided.");
+    }
+
+    const parts = [];
+
+    while (element.parentElement) {
+      let selector = element.tagName.toLowerCase();
+
+      if (element.id) {
+        selector += `#${ element.id }`;
+        parts.unshift(selector);
+        break;
+      } else {
+        let sibling = element;
+        let nthChild = 1;
+        while (sibling.previousElementSibling) {
+          sibling = sibling.previousElementSibling;
+          if (sibling.tagName.toLowerCase() === selector) {
+            nthChild++;
+          }
+        }
+        selector += `:nth-of-type(${ nthChild })`;
+      }
+      parts.unshift(selector);
+      element = element.parentElement;
+    }
+
+    return parts.join(" > ");
+  }
+
   function collectHeadings() {
     const headings = Array.from(document.querySelectorAll("h1, h2, h3, h4, h5, h6, [role='heading']"));
 
@@ -75,7 +91,10 @@ export function utilsHeading({ collect = false, analyze = false }) {
       // Get inner HTML and text with tags
       const html = heading.innerHTML;
       const text = heading.innerText || heading.textContent;
-      const textWithTags = `<${ heading.tagName.toLowerCase() }${ role ? `role="{ role }"` : "" }${ ariaLevel ? ` aria-level="${ ariaLevel }"` : "" }>${ text }</${ heading.tagName.toLowerCase() }>`;
+      const textWithTags = `<${ heading.tagName.toLowerCase() }${ role ? ` role="${ role }"` : "" }${ ariaLevel ? ` aria-level="${ ariaLevel }"` : "" }>${ text }</${ heading.tagName.toLowerCase() }>`;
+
+      // Generate unique selector
+      const uniqueSelector = generateUniqueSelector(heading);
 
       return {
         element: heading,
@@ -93,7 +112,8 @@ export function utilsHeading({ collect = false, analyze = false }) {
         title: title,
         otherAttributes: otherAttributes,
         html: html,
-        textWithTags: textWithTags
+        textWithTags: textWithTags,
+        uniqueSelector: uniqueSelector,
       };
     });
   }
