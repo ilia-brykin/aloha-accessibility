@@ -1,0 +1,22 @@
+{
+  "_ERROR_HEADER_GREATER_6_{{text}}_": "Уровень заголовка больше 6: {{ text }}",
+  "_ERROR_HEADER_MULTIPLE_LEVEL_1_{{text}}_": "Найдено несколько заголовков уровня 1: {{ text }}",
+  "_ERROR_HEADER_HEADING_ORDER_{{text}}_": "Некорректный порядок заголовков: {{ text }}",
+  "_WARNING_HEADER_DISPLAY_NONE_{{text}}_": "Заголовок не виден: {{ text }}",
+  "_WARNING_HEADER_ARIA_HIDDEN_{{text}}_": "Заголовок скрыт для экранного считывателя с aria-hidden: {{ text }}",
+  "_BTN_SELECT_HEADINGS_": "Выделить заголовки",
+  "_HEADINGS_CURRENT_PAGE_": "Заголовки на текущей странице",
+  "_TAB_HIGHLIGHT_": "Выделить",
+  "_TAB_STRUCTURE_": "Структура",
+  "_TAB_CHECK_": "Проверка доступности",
+  "_HEADINGS_STRUCTURE_": "Структура заголовков",
+  "_SHOW_HEADINGS_STRUCTURE_": "Показать структуру",
+  "_VISIBLE_ELEMENT_": "Видимый элемент",
+  "_VISIBLE_FOR_SCREEN_READER_": "Видимый для скринридера",
+  "_BTN_SHOW_ADDITIONAL_INFO_": "Показать дополнительную информацию",
+  "_BTN_HIDE_ADDITIONAL_INFO_": "Скрыть дополнительную информацию",
+  "_HEADINGS_LINKS_": "Ссылки по теме: заголовки",
+  "_HEADINGS_LINKS_ROLE_HEADING_": "Использование role=heading для обозначения заголовков",
+  "_HEADINGS_LINKS_BITV_ILIA_": "HTML-структурные элементы для заголовков (Шаг проверки 9.1.3.1a)",
+  "_LEVEL_": "Уровень"
+}

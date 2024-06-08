@@ -16634,6 +16634,24 @@ input:not(:-webkit-autofill) {
 .the_navbar {
   height: 40px; }
 
+.dl_hor {
+  --a_dl_dt_width: 200px;
+  --a_dl_dt_dd_border_color: var(--a_color_gray_800);
+  --a_dl_dt_dd_border_width: 1px;
+  --a_dl_dt_dd_padding: 0.5rem;
+  display: flex;
+  flex-wrap: wrap; }
+  .dl_hor dt, .dl_hor dd {
+    border-bottom: var(--a_dl_dt_dd_border_width) solid var(--a_dl_dt_dd_border_color); }
+  .dl_hor dt {
+    width: var(--a_dl_dt_width);
+    text-align: right;
+    background-color: var(--a_color_gray_200);
+    padding-right: var(--a_dl_dt_dd_padding); }
+  .dl_hor dd {
+    width: calc(100% - var(--a_dl_dt_width));
+    padding-left: var(--a_dl_dt_dd_padding); }
+
 html {
   box-sizing: border-box;
   font-size: 12px; }

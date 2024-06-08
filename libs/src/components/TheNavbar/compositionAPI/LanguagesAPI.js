@@ -6,13 +6,17 @@ import {
   setLanguage,
 } from "aloha-vue/src/ATranslation/compositionAPI/ATranslationAPI";
 
-export const modelLanguage = ref("de");
+export const modelLanguage = ref("en");
 
 export default function LanguagesAPI() {
   const languages = [
     {
       label: "Deutsch",
       value: "de",
+    },
+    {
+      label: "English",
+      value: "en",
     },
     {
       label: "Русский",
@@ -35,6 +39,6 @@ export default function LanguagesAPI() {
 }
 
 export function setLanguageFromLocalStorage() {
-  modelLanguage.value = localStorage.getItem("language") || "de";
+  modelLanguage.value = localStorage.getItem("language") || "en";
 }
 

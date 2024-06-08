@@ -1,11 +1,15 @@
 import {
   computed,
   inject,
+  ref,
 } from "vue";
 
 import {
   traverseDocument,
 } from "../../../functions/utils";
+import {
+  utilsHeading,
+} from "../utils/utils";
 import {
   isUndefined,
 } from "lodash-es";
@@ -14,6 +18,8 @@ export default function EventsAPI({
   elementsWithModel = computed(() => []),
 }) {
   const chromeTabId = inject("chromeTabId");
+
+  const allHeadings = ref([]);
 
   const toggleHeadings = ({ shouldShowTags } = {}) => {
     const _shouldShowTags = isUndefined(shouldShowTags) ?
@@ -35,56 +41,47 @@ export default function EventsAPI({
     toggleHeadings({ shouldShowTags: false });
   };
 
-  const checkHeadings = async() => {
+  const getHeadings = async() => {
     const [TAB] = await chrome.tabs.query({ active: true, currentWindow: true });
 
-    chrome.scripting.executeScript(
-      {
-        target: {
-          tabId: TAB.id,
-          allFrames: true,
-        },
-        function: _checkHeadings,
-        args: [elementsWithModel.value, "a11y_heading",],
-      }
-    );
-  };
-
-  function _checkHeadings() {
-    checkHeadingsInWindow(window);
-
-    function checkHeadingsInWindow(currentWindow = window) {
-      try {
-        findAllHeadings(currentWindow);
-        // TODO: frames
-        // for (let i = 0; i < currentWindow.frames.length; i++) {
-        //   checkHeadingsInWindow(currentWindow.frames[i]);
-        // }
-      } catch (e) {
-        console.warn(e);
-      }
-    }
-
-    function findAllHeadings(currentWindow) {
-      const HEADINGS = currentWindow.document.querySelectorAll("h1, h2, h3, h4, h5, h6");
-      const HEADINGS_VISIBLE = [];
-      // tagName
-      HEADINGS.forEach(element => {
-        if (isElementVisible(element)) {
-          HEADINGS_VISIBLE.push(element);
+    return new Promise((resolve, reject) => {
+      chrome.runtime.onMessage.addListener(function listener(message) {
+        if (message.type === "HEADINGS_COLLECTED") {
+          chrome.runtime.onMessage.removeListener(listener);
+          resolve(message.result);
+        } else if (message.type === "HEADINGS_ANALYZED") {
+          chrome.runtime.onMessage.removeListener(listener);
+          resolve(message.result);
         }
       });
-      console.log("HEADINGS_VISIBLE", HEADINGS_VISIBLE);
-      console.log("length", HEADINGS_VISIBLE.length);
-    }
 
-    function isElementVisible(element) {
-      return element.offsetWidth > 0 && element.offsetHeight > 0;
-    }
-  }
+      chrome.scripting.executeScript(
+        {
+          target: { tabId: TAB.id, allFrames: true },
+          function: utilsHeading,
+          args: [{ collect: true }]
+        },
+        () => {
+          if (chrome.runtime.lastError) {
+            reject(chrome.runtime.lastError);
+          }
+        }
+      );
+    });
+  };
+
+  const onGetHeadings = () => {
+    getHeadings().then(result => {
+      allHeadings.value = result;
+      console.log(result);
+    }).catch(error => {
+      console.error(error);
+    });
+  };
 
   return {
-    checkHeadings,
+    allHeadings,
+    onGetHeadings,
     resetHeadings,
     toggleHeadings,
   };

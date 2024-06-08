@@ -4,32 +4,85 @@ div
     text="_HEADINGS_H1_H6_"
   )
 
-  div
-    a-checkbox(
-      v-model="model.tags"
-      :data="tags"
-      :inline="true"
-      :has-control-checkbox="true"
-      key-id="name"
-      key-label="name"
-      label="_TAGS_"
+  a-tabs(
+    :data="dataTabs"
+    :is-boxed="true"
+  )
+    template(
+      v-slot:tab="{ tab }"
     )
-    a-checkbox.a_mt_2.a_pt_1(
-      v-model="model.tags"
-      :data="elementsRoleHeading"
-      :inline="true"
-      :has-control-checkbox="true"
-      key-id="name"
-      key-label="name"
-      label="_ROLE_HEADING_"
+      a-translation(
+        tag="span"
+        :text="tab.label"
+      )
+
+    template(
+      v-slot:content1
     )
-    a-element.a_btn.a_btn_secondary(
-      type="button"
-      text="_APPLY_"
-      @click="toggleHeadings"
+      a-translation(
+        tag="h2"
+        text="_HEADINGS_CURRENT_PAGE_"
+      )
+      .a_mt_5
+        a-checkbox(
+          v-model="model.tags"
+          :data="tags"
+          :inline="true"
+          :has-control-checkbox="true"
+          key-id="name"
+          key-label="name"
+          label="_TAGS_"
+        )
+        a-checkbox.a_mt_2.a_pt_1(
+          v-model="model.tags"
+          :data="elementsRoleHeading"
+          :inline="true"
+          :has-control-checkbox="true"
+          key-id="name"
+          key-label="name"
+          label="_ROLE_HEADING_"
+        )
+      .a_mt_3
+        a-element.a_btn.a_btn_secondary(
+          type="button"
+          text="_BTN_SELECT_HEADINGS_"
+          @click="toggleHeadings"
+        )
+
+    template(
+      v-slot:content2
     )
-    // a-element.a_btn.a_btn_secondary(
-    //   type="button"
-    //   text="_HEADINGS_CHECK_"
-    //   @click="checkHeadings"
-    // )
+      .a_d_flex.a_align_items_center.a_flex_wrap
+        a-translation(
+          tag="h2"
+          text="_HEADINGS_STRUCTURE_"
+        )
+        a-element.a_btn.a_btn_secondary.a_ml_2(
+          type="button"
+          text="_SHOW_HEADINGS_STRUCTURE_"
+          @click="onGetHeadings"
+        )
+        a-element.a_btn.a_btn_secondary.a_ml_3(
+          v-if="allHeadings.length"
+          type="button"
+          :text="textButtonAdditionalInfoVisible"
+          @click="toggleAdditionalInfo"
+        )
+      ul.a_list_group.a_mt_3(
+        v-if="allHeadings.length"
+      )
+        page-headings-list-item(
+          v-for="(header, headerIndex) in allHeadings"
+          :key="headerIndex"
+          :header="header"
+          :is-additional-visible="isAdditionalInfoVisible"
+        )
+
+    template(
+      v-slot:content3
+    )
+
+    template(
+      v-slot:links
+    )
+      page-headings-links

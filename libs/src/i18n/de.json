@@ -5,7 +5,7 @@
   "_BLOCKQUOTES_SHOW_": "Zitate einblenden",
   "_BLOCKQUOTES_TITLE_": "HTML-Strukturelemente für Zitate",
   "_HEADINGS_CHECK_": "Überschriften prüfen",
-  "_HEADINGS_H1_H6_": "Überschriften h1-h6",
+  "_HEADINGS_H1_H6_": "Überschriften",
   "_HEADINGS_H1_H6_TITLE_": "Verwendung von h1-h6 zur Identifizierung von Überschriften",
   "_LANGUAGE_": "Sprache",
   "_LINKS_": "Links",
@@ -18,5 +18,7 @@
   "_WELCOME_": "Willkommen",
   "_TAGS_": "Tags",
   "_APPLY_": "Anwenden",
-  "_ROLE_HEADING_": "Rolle: Header"
+  "_ROLE_HEADING_": "Rolle: Header",
+  "_TAB_LINKS_": "Links",
+  "_TEXT_": "Text"
 }

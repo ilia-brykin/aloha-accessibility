@@ -7,9 +7,12 @@ chrome.runtime.onInstalled.addListener(() => {
   // console.log('Default background color set to %cgreen', `color: #3aa757`);
 });
 
-function onMessageListener(arg) {
-  console.log(...arg);
-  return true;
+function onMessageListener(message) {
+  if (message && typeof message[Symbol.iterator] === "function") {
+    console.log(...message);
+  } else {
+    console.log(message);
+  }
 }
 
 chrome.runtime.onMessage.addListener(onMessageListener);

@@ -1,0 +1,89 @@
+li.a_list_group__item
+  div(
+    :style="stylesLocal"
+  ) {{ header.textWithTags }}
+  dl.dl_hor.a_mb_0(
+    v-if="isAdditionalVisible"
+  )
+    a-translation(
+      tag="dt"
+      text="_TEXT_"
+      text-after=":"
+    )
+    dd {{ header.text }}
+
+    template(
+      v-if="!header.isVisible"
+    )
+      a-translation(
+        tag="dt"
+        text="_VISIBLE_ELEMENT_"
+        text-after=":"
+      )
+      dd {{ filterBoolean(header.isVisible) }}
+
+    template(
+      v-if="header.ariaHidden"
+    )
+      a-translation(
+        tag="dt"
+        text="_VISIBLE_FOR_SCREEN_READER_"
+        text-after=" (aria-hidden)"
+      )
+      dd {{ filterBoolean(header.ariaHidden) }}
+
+    template(
+      v-if="header.id"
+    )
+      dt id:
+      dd {{ header.id }}
+
+    template(
+      v-if="header.level"
+    )
+      a-translation(
+        tag="dt"
+        text="_LEVEL_"
+        text-after=":"
+      )
+      dd {{ header.level }}
+
+    template(
+      v-if="header.ariaLevel"
+    )
+      dt aria-level:
+      dd {{ header.ariaLevel }}
+
+    template(
+      v-if="header.role"
+    )
+      dt role:
+      dd {{ header.role }}
+
+    template(
+      v-if="header.ariaLabel"
+    )
+      dt aria-label:
+      dd {{ header.ariaLabel }}
+
+    template(
+      v-if="header.ariaDescribedBy"
+    )
+      dt aria-describedby:
+      dd {{ header.ariaDescribedBy }}
+
+    template(
+      v-if="header.title"
+    )
+      dt title:
+      dd {{ header.title }}
+
+    template(
+      v-if="header.class"
+    )
+      dt class:
+      dd {{ header.class }}
+
+    dt HTML:
+    dd {{ header.html }}
+

@@ -1,0 +1,22 @@
+{
+  "_ERROR_HEADER_GREATER_6_{{text}}_": "Heading level greater than 6: {{ text }}",
+  "_ERROR_HEADER_MULTIPLE_LEVEL_1_{{text}}_": "Multiple level 1 headings found: {{ text }}",
+  "_ERROR_HEADER_HEADING_ORDER_{{text}}_": "Incorrect heading order: {{ text }}",
+  "_WARNING_HEADER_DISPLAY_NONE_{{text}}_": "Heading is not visible: {{ text }}",
+  "_WARNING_HEADER_ARIA_HIDDEN_{{text}}_": "Heading is hidden for screen reader with aria-hidden: {{ text }}",
+  "_BTN_SELECT_HEADINGS_": "Highlight headings",
+  "_HEADINGS_CURRENT_PAGE_": "Headings on the current page",
+  "_TAB_HIGHLIGHT_": "Highlight",
+  "_TAB_STRUCTURE_": "Structure",
+  "_TAB_CHECK_": "Accessibility check",
+  "_HEADINGS_STRUCTURE_": "Headings structure",
+  "_SHOW_HEADINGS_STRUCTURE_": "Show structure",
+  "_VISIBLE_ELEMENT_": "Visible element",
+  "_VISIBLE_FOR_SCREEN_READER_": "Visible to screen reader",
+  "_BTN_SHOW_ADDITIONAL_INFO_": "Show additional information",
+  "_BTN_HIDE_ADDITIONAL_INFO_": "Hide additional information",
+  "_HEADINGS_LINKS_": "Related Links: headings",
+  "_HEADINGS_LINKS_ROLE_HEADING_": "Using role=heading to identify headings",
+  "_HEADINGS_LINKS_BITV_ILIA_": "HTML structural elements for headings (check step 9.1.3.1a)",
+  "_LEVEL_": "Level"
+}
