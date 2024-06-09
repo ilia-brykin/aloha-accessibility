@@ -63,11 +63,22 @@ div
           @click="onGetHeadings"
         )
         a-element.a_btn.a_btn_secondary.a_ml_3(
+          type="button"
+          text="_BTN_ACCESSIBILITY_CHECK_"
+          @click="onAnalyzeHeadings"
+        )
+        a-element.a_btn.a_btn_secondary.a_ml_3(
           v-if="allHeadings.length"
           type="button"
           :text="textButtonAdditionalInfoVisible"
           @click="toggleAdditionalInfo"
         )
+      a-alert(
+        v-if="warnings && !warnings.length"
+        :is-visible="true"
+        type="info"
+        html="_HEADING_NOT_WARNINGS_"
+      )
       ul.a_list_group.a_mt_3(
         v-if="allHeadings.length"
       )
@@ -81,6 +92,36 @@ div
     template(
       v-slot:content3
     )
+      .a_d_flex.a_align_items_center.a_flex_wrap
+        a-translation(
+          tag="h2"
+          text="_ACCESSIBILITY_CHECK_FOR_HEADINGS_"
+        )
+        a-element.a_btn.a_btn_secondary.a_ml_2(
+          type="button"
+          text="_BTN_ACCESSIBILITY_CHECK_"
+          @click="onAnalyzeHeadings"
+        )
+      .a_mt_3(
+        v-if="warnings"
+      )
+        ul.a_list_group(
+          v-if="warnings.length"
+        )
+          li.a_list_group__item(
+            v-for="(warning, index) in warnings"
+            :key="index"
+          )
+            a-translation(
+              :text="warning.key"
+              :extra="{ text: warning.text }"
+            )
+        a-alert(
+          v-else
+          :is-visible="true"
+          type="info"
+          html="_HEADING_NOT_WARNINGS_"
+        )
 
     template(
       v-slot:links

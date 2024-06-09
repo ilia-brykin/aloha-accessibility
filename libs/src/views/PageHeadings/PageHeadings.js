@@ -2,6 +2,7 @@ import {
   onBeforeUnmount,
 } from "vue";
 
+import AAlert from "aloha-vue/src/AAlert/AAlert";
 import ACheckbox from "aloha-vue/src/ui/ACheckbox/ACheckbox";
 import AElement from "aloha-vue/src/AElement/AElement";
 import ATabs from "aloha-vue/src/ATabs/ATabs";
@@ -17,6 +18,7 @@ import ToggleAPI from "./compositionAPI/ToggleAPI";
 export default {
   name: "PageHeadings",
   components: {
+    AAlert,
     ACheckbox,
     AElement,
     ATabs,
@@ -34,9 +36,11 @@ export default {
     
     const {
       allHeadings,
+      onAnalyzeHeadings,
       onGetHeadings,
       resetHeadings,
       toggleHeadings,
+      warnings,
     } = EventsAPI({
       elementsWithModel,
     });
@@ -62,11 +66,13 @@ export default {
       elementsWithModel,
       isAdditionalInfoVisible,
       model,
+      onAnalyzeHeadings,
       onGetHeadings,
       tags,
       textButtonAdditionalInfoVisible,
       toggleAdditionalInfo,
       toggleHeadings,
+      warnings,
     };
   },
 };

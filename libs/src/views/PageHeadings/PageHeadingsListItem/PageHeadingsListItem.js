@@ -1,3 +1,4 @@
+import AAlert from "aloha-vue/src/AAlert/AAlert";
 import AElement from "aloha-vue/src/AElement/AElement";
 import ATranslation from "aloha-vue/src/ATranslation/ATranslation";
 
@@ -8,6 +9,7 @@ import StylesAPI from "./compositionAPI/StylesAPI";
 export default {
   name: "PageHeadingsListItem",
   components: {
+    AAlert,
     AElement,
     ATranslation,
   },

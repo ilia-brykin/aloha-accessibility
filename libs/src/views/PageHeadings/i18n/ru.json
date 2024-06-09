@@ -1,7 +1,7 @@
 {
-  "_ERROR_HEADER_GREATER_6_{{text}}_": "Уровень заголовка больше 6: {{ text }}",
-  "_ERROR_HEADER_MULTIPLE_LEVEL_1_{{text}}_": "Найдено несколько заголовков уровня 1: {{ text }}",
-  "_ERROR_HEADER_HEADING_ORDER_{{text}}_": "Некорректный порядок заголовков: {{ text }}",
+  "_WARNING_HEADER_GREATER_6_{{text}}_": "Уровень заголовка больше 6: {{ text }}",
+  "_WARNING_HEADER_MULTIPLE_LEVEL_1_{{text}}_": "Найдено несколько заголовков уровня 1: {{ text }}",
+  "_WARNING_HEADER_HEADING_ORDER_{{text}}_": "Некорректный порядок заголовков: {{ text }}",
   "_WARNING_HEADER_DISPLAY_NONE_{{text}}_": "Заголовок не виден: {{ text }}",
   "_WARNING_HEADER_ARIA_HIDDEN_{{text}}_": "Заголовок скрыт для экранного считывателя с aria-hidden: {{ text }}",
   "_BTN_SELECT_HEADINGS_": "Выделить заголовки",
@@ -18,5 +18,14 @@
   "_HEADINGS_LINKS_": "Ссылки по теме: заголовки",
   "_HEADINGS_LINKS_ROLE_HEADING_": "Использование role=heading для обозначения заголовков",
   "_HEADINGS_LINKS_BITV_ILIA_": "HTML-структурные элементы для заголовков (Шаг проверки 9.1.3.1a)",
-  "_LEVEL_": "Уровень"
+  "_HEADINGS_LINKS_USING_H1_H6_": "Использование h1-h6 для определения заголовков",
+  "_HEADINGS_LINKS_THE_HTML_SECTION_HEADING_ELEMENTS_": "<h1>–<h6>: Элементы заголовков разделов HTML",
+  "_HEADINGS_LINKS_HOW_TO_STRUCTURE_HEADINGS_FOR_WEB_ACCESSIBILITY_": "Как структурировать заголовки для веб-доступности",
+  "_HEADINGS_LINKS_DOCUMENT_HAS_HEADING_FOR_NON_REPEATED_CONTENT_": "Документ имеет заголовок для неповторяющегося контента",
+  "_HEADINGS_LINKS_ORGANIZING_A_PAGE_USING_HEADINGS_": "Организация страницы с использованием заголовков",
+  "_HEADINGS_LINKS_FAILURE_1_3_1_MARKUP_OR_TEXT_": "Несоответствие критерию успеха 1.3.1 из-за использования изменений в представлении текста для передачи информации без использования соответствующей разметки или текста",
+  "_HEADINGS_LINKS_FAILURE_1_3_1_USING_STRUCTURAL_MARKUP_": "Несоответствие критерию успеха 1.3.1 из-за использования структурной разметки таким образом, что она не отражает отношения в содержимом",
+  "_LEVEL_": "Уровень",
+  "_BTN_ACCESSIBILITY_CHECK_": "Проверить доступность",
+  "_HEADING_NOT_WARNINGS_": "Замечаний не выявлено, но это не гарантирует отсутствие ошибок. Рекомендуется вручную проверить правильность использования заголовков."
 }

@@ -1,3 +1,32 @@
+export async function onUtilsHeading({ collect, analyze }) {
+  const [TAB] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+  return new Promise((resolve, reject) => {
+    chrome.runtime.onMessage.addListener(function listener(message) {
+      if (message.type === "HEADINGS_COLLECTED") {
+        chrome.runtime.onMessage.removeListener(listener);
+        resolve(message.result);
+      } else if (message.type === "HEADINGS_ANALYZED") {
+        chrome.runtime.onMessage.removeListener(listener);
+        resolve(message.result);
+      }
+    });
+
+    chrome.scripting.executeScript(
+      {
+        target: { tabId: TAB.id, allFrames: true },
+        function: utilsHeading,
+        args: [{ collect, analyze }]
+      },
+      () => {
+        if (chrome.runtime.lastError) {
+          reject(chrome.runtime.lastError);
+        }
+      }
+    );
+  });
+}
+
 export function utilsHeading({ collect = false, analyze = false }) {
   if (analyze) {
     const result = analyzeHeadings();
@@ -114,6 +143,7 @@ export function utilsHeading({ collect = false, analyze = false }) {
         html: html,
         textWithTags: textWithTags,
         uniqueSelector: uniqueSelector,
+        warnings: [],
       };
     });
   }
@@ -121,24 +151,25 @@ export function utilsHeading({ collect = false, analyze = false }) {
   /**
    * Analyzes the accessibility of headings in the document.
    * Checks for the following issues:
-   * - Incorrect heading order.
    * - Heading levels greater than 6.
    * - Multiple level 1 headings.
+   * - Incorrect heading order.
    * - Visibility and ARIA hidden attributes (as warnings).
-   * @returns {Object} An object containing arrays of errors and warnings.
-   * - {Array<string>} errors: An array of error messages.
-   * - {Array<string>} warnings: An array of warning messages.
+   *
+   * @returns {Object} An object containing an array of warnings.
+   * - {Array<Object>} warnings: An array of warning objects. Each warning object contains:
+   *   - {string} key: The warning key, indicating the type of warning.
+   *   - {string} text: The text content of the heading associated with the warning.
    */
   function analyzeHeadings() {
     const ERROR_WARNING_TEXTS = {
-      levelGreater6: "_ERROR_HEADER_GREATER_6_{{text}}_",
-      multipleLevel1: "_ERROR_HEADER_MULTIPLE_LEVEL_1_{{text}}_",
-      headingOrder: "_ERROR_HEADER_HEADING_ORDER_{{text}}_",
+      levelGreater6: "_WARNING_HEADER_GREATER_6_{{text}}_",
+      multipleLevel1: "_WARNING_HEADER_MULTIPLE_LEVEL_1_{{text}}_",
+      headingOrder: "_WARNING_HEADER_HEADING_ORDER_{{text}}_",
       displayNone: "_WARNING_HEADER_DISPLAY_NONE_{{text}}_",
       ariaHidden: "_WARNING_HEADER_ARIA_HIDDEN_{{text}}_",
     };
     const headings = collectHeadings();
-    const errors = [];
     const warnings = [];
     let lastLevel = 0;
     let h1Count = 0;
@@ -146,13 +177,17 @@ export function utilsHeading({ collect = false, analyze = false }) {
     headings.forEach(heading => {
       const {
         level,
-        isDisplayNone,
+        isVisible,
         ariaHidden,
       } = heading;
 
       // Check if the heading level is greater than 6
       if (level > 6) {
-        errors.push({
+        heading.warnings.push({
+          key: ERROR_WARNING_TEXTS.levelGreater6,
+          text: heading.text,
+        });
+        warnings.push({
           key: ERROR_WARNING_TEXTS.levelGreater6,
           text: heading.text,
         });
@@ -162,7 +197,11 @@ export function utilsHeading({ collect = false, analyze = false }) {
       if (level === 1) {
         h1Count++;
         if (h1Count > 1) {
-          errors.push({
+          heading.warnings.push({
+            key: ERROR_WARNING_TEXTS.multipleLevel1,
+            text: heading.text,
+          });
+          warnings.push({
             key: ERROR_WARNING_TEXTS.multipleLevel1,
             text: heading.text,
           });
@@ -171,14 +210,22 @@ export function utilsHeading({ collect = false, analyze = false }) {
 
       // Check for incorrect heading order
       if (level > lastLevel + 1) {
-        errors.push({
+        heading.warnings.push({
+          key: ERROR_WARNING_TEXTS.headingOrder,
+          text: heading.text,
+        });
+        warnings.push({
           key: ERROR_WARNING_TEXTS.headingOrder,
           text: heading.text,
         });
       }
 
       // Check if the heading is not visible
-      if (isDisplayNone) {
+      if (!isVisible) {
+        heading.warnings.push({
+          key: ERROR_WARNING_TEXTS.displayNone,
+          text: heading.text,
+        });
         warnings.push({
           key: ERROR_WARNING_TEXTS.displayNone,
           text: heading.text,
@@ -187,6 +234,10 @@ export function utilsHeading({ collect = false, analyze = false }) {
 
       // Check if the heading is hidden with aria-hidden
       if (ariaHidden) {
+        heading.warnings.push({
+          key: ERROR_WARNING_TEXTS.ariaHidden,
+          text: heading.text,
+        });
         warnings.push({
           key: ERROR_WARNING_TEXTS.ariaHidden,
           text: heading.text,
@@ -196,7 +247,7 @@ export function utilsHeading({ collect = false, analyze = false }) {
       lastLevel = level;
     });
 
-    return { errors, warnings };
+    return { warnings, headings };
   }
 }
 

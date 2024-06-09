@@ -11,11 +11,6 @@ export default function TabsAPI() {
       label: "_TAB_STRUCTURE_",
     },
     {
-      id: "tab_3",
-      slotContent: "content3",
-      label: "_TAB_CHECK_",
-    },
-    {
       id: "tab_4",
       slotContent: "links",
       label: "_TAB_LINKS_",

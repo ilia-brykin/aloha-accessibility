@@ -8,7 +8,7 @@ import {
   traverseDocument,
 } from "../../../functions/utils";
 import {
-  utilsHeading,
+  onUtilsHeading,
 } from "../utils/utils";
 import {
   isUndefined,
@@ -20,6 +20,7 @@ export default function EventsAPI({
   const chromeTabId = inject("chromeTabId");
 
   const allHeadings = ref([]);
+  const warnings = ref(undefined);
 
   const toggleHeadings = ({ shouldShowTags } = {}) => {
     const _shouldShowTags = isUndefined(shouldShowTags) ?
@@ -41,39 +42,18 @@ export default function EventsAPI({
     toggleHeadings({ shouldShowTags: false });
   };
 
-  const getHeadings = async() => {
-    const [TAB] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-    return new Promise((resolve, reject) => {
-      chrome.runtime.onMessage.addListener(function listener(message) {
-        if (message.type === "HEADINGS_COLLECTED") {
-          chrome.runtime.onMessage.removeListener(listener);
-          resolve(message.result);
-        } else if (message.type === "HEADINGS_ANALYZED") {
-          chrome.runtime.onMessage.removeListener(listener);
-          resolve(message.result);
-        }
-      });
-
-      chrome.scripting.executeScript(
-        {
-          target: { tabId: TAB.id, allFrames: true },
-          function: utilsHeading,
-          args: [{ collect: true }]
-        },
-        () => {
-          if (chrome.runtime.lastError) {
-            reject(chrome.runtime.lastError);
-          }
-        }
-      );
+  const onGetHeadings = () => {
+    onUtilsHeading({ collect: true }).then(result => {
+      allHeadings.value = result;
+    }).catch(error => {
+      console.error(error);
     });
   };
 
-  const onGetHeadings = () => {
-    getHeadings().then(result => {
-      allHeadings.value = result;
-      console.log(result);
+  const onAnalyzeHeadings = () => {
+    onUtilsHeading({ analyze: true }).then(result => {
+      warnings.value = result.warnings;
+      allHeadings.value = result.headings;
     }).catch(error => {
       console.error(error);
     });
@@ -81,8 +61,10 @@ export default function EventsAPI({
 
   return {
     allHeadings,
+    onAnalyzeHeadings,
     onGetHeadings,
     resetHeadings,
     toggleHeadings,
+    warnings,
   };
 }
