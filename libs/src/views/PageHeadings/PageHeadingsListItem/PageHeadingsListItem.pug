@@ -3,9 +3,17 @@ li.a_list_group__item
     :style="stylesLocal"
   ) {{ header.textWithTags }}
     a-element.a_btn.a_btn_primary.a_ml_3(
+      v-if="header.isVisible"
       type="button"
       text="_BTN_HIGHLIGHT_ELEMENT_"
       @click="onHighlightElement"
+    )
+    a-translation.a_ml_3(
+      v-else
+      tag="strong"
+      text="_ELEMENT_HIDDEN_"
+      text-before="("
+      text-after=")"
     )
   dl.dl_hor.a_mb_0(
     v-if="isAdditionalVisible"
